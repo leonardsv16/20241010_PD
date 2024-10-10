@@ -21,23 +21,17 @@
 <div class="w-4/5 m-auto pt-20">
     @if (isset(Auth::user()->id) && Auth::user()->id == $post->user_id)
         <span class="float-right">
-            <a 
-                href="/blog/{{ $post->slug }}/edit"
-                class="text-gray-700 italic hover:text-gray-900 pb-1 border-b-2">
+            <a href="/blog/{{ $post->slug }}/edit" class="text-gray-700 italic hover:text-gray-900 pb-1 border-b-2">
                 Edit
             </a>
         </span>
 
         <span class="float-right">
-                <form 
-                action="/blog/{{ $post->slug }}"
-                method="POST">
+            <form action="/blog/{{ $post->slug }}/destroy" method="POST">
                 @csrf
                 @method('delete')
 
-                <button
-                    class="text-red-500 pr-3"
-                    type="submit">
+                <button class="text-red-500 pr-3" type="submit">
                     Delete
                 </button>
 
@@ -46,7 +40,8 @@
     @endif
 
     <span class="text-gray-500">
-        By <span class="font-bold italic text-gray-800">{{ $post->user->name }}</span>, Created on {{ date('jS M Y', strtotime($post->updated_at)) }}
+        By <span class="font-bold italic text-gray-800">{{ $post->user_id}}</span>, Created on
+        {{ date('jS M Y', strtotime($post->updated_at)) }}
     </span>
 
     <p class="text-xl text-gray-700 pt-8 pb-10 leading-8 font-light">
@@ -61,14 +56,14 @@
         <div>
             <h3>Comments</h3>
             @foreach ($post->comments as $comment)
-                <p></p>
+                <p> {{$comment}}</p>
             @endforeach
         </div>
     @endif
 
     @if (Auth::check())
         <div>
-            <form action="/blog/{{$post->slug}}/comments/create" method="post">
+            <form action="/blog/{{$post->slug}}" method="post">
                 @csrf
                 <label for="commentContent">Comment</label>
                 <textarea class="resize rounded-md" name="content" id="commentContent"></textarea>

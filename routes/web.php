@@ -29,13 +29,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/blog', [PostsController::class, 'index'])->name('blog.index');
 Route::get('/blog/create', [PostsController::class, 'create'])->name('blog.create');
 Route::post('/blog', [PostsController::class, 'store'])->name('blog.store');
 Route::get('/blog/{blog}/edit', [PostsController::class, 'edit'])->name('blog.edit');
 Route::put('/blog/{blog}', [PostsController::class, 'update'])->name('blog.update');
+Route::get('/blog/{blog}/destroy', [PostsController::class, 'destroy'])->name('blog.destroy');
+Route::get('/blog/{blog}/show', [PostsController::class, 'show'])->name('blog.show');
 
-
-Route::post('/blog/{slug}/comments/create', [CommentsController::class, 'store']);
+Route::post('/blog/{slug}/comments/create', [CommentsController::class, 'store'])->name('comment.create');

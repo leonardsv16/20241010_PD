@@ -69,15 +69,9 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Post $post, $slug)
     {
-        $post = null;
-        if (is_numeric($slug) && (int)$slug == $slug) {
-            $post = Post::find($slug);
-        } else {
-            $post = Post::where('slug', $slug)->first();
-        }
-
+        return view('blog.show', compact('slug', 'post'));
     }
 
     /**
@@ -86,9 +80,9 @@ class PostsController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($slug)
+    public function edit(Post $post, $slug)
     {
-
+        return view('blog.edit', compact('post'));
     }
 
     /**

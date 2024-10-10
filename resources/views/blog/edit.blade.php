@@ -22,26 +22,20 @@
 @endif
 
 <div class="w-4/5 m-auto pt-20">
-    <form 
-        action="/blog/{{ $post->slug }}"
-        method="POST"
-        enctype="multipart/form-data">
+    <form action="{{ route('blog.index') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
+        <!-- @method('PUT') -->
 
-        <input 
-            type="text"
-            name="title"
-            value="{{ $post->title }}"
+        <input type="text" name="title" value="{{ $post->title }}"
             class="bg-transparent block border-b-2 w-full h-20 text-6xl outline-none">
 
-        <textarea 
-            name="description"
-            placeholder="Description..."
-            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none">{{ $post->description }}</textarea> 
+        <textarea name="description" placeholder="Description..." value="{{ $post->description }}"
+            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none">{{ $post->description }}</textarea>
 
-        <button    
-            type="submit"
+        <input type="file" name="image" value="{{ $post->image_path }}"
+            class="bg-transparent block border-b-2 w-full h-20 text-6xl outline-none">
+
+        <button type="submit"
             class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
             Submit Post
         </button>
